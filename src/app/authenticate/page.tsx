@@ -1,6 +1,8 @@
-"use client";
+import dynamic from "next/dynamic";
 
-import Authenticate from "@/components/Authenticate";
+const Authenticate = dynamic(() => import("@/components/Authenticate"), {
+  ssr: false,
+});
 
 export default function AuthenticatePage() {
   return <Authenticate />;
