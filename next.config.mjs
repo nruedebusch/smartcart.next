@@ -16,6 +16,14 @@ const nextConfig = {
       process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
     NEXT_PUBLIC_FIREBASE_APP_ID: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
   },
+  exportPathMap: function () {
+    return {
+      "/": { page: "/" },
+      "/authenticate": { page: "/authenticate" },
+      "/dashboard": { page: "/dashboard" },
+      "/_not-found": { page: "/_not-found" },
+    };
+  },
 };
 
 export default nextConfig;
