@@ -23,7 +23,7 @@ export default function HeaderAndHero() {
   const router = useRouter();
 
   return (
-    <Box bg={bgColor} minHeight="100vh" display="flex" flexDirection="column">
+    <Box bg={bgColor} minHeight="100dvh" display="flex" flexDirection="column">
       {/* Header */}
       <Box as="header" py={4} boxShadow="sm">
         <Container maxW="container.xl">
