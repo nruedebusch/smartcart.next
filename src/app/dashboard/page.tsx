@@ -25,6 +25,7 @@ import {
   ListItem,
   Wrap,
   WrapItem,
+  useToast,
 } from "@chakra-ui/react";
 
 export default function Dashboard() {
@@ -32,6 +33,7 @@ export default function Dashboard() {
   const [inputValue, setInputValue] = useState("");
   const [error, setError] = useState(false);
   const router = useRouter();
+  const toast = useToast();
 
   const bgColor = useColorModeValue("white", "gray.800");
   const textColor = useColorModeValue("gray.600", "gray.200");
@@ -75,8 +77,27 @@ export default function Dashboard() {
 
   const saveShoppingList = async () => {
     if (auth.currentUser) {
-      await setDoc(doc(db, "users", auth.currentUser.uid), { shoppingList });
-      console.log("Liste gespeichert:", shoppingList);
+      try {
+        await setDoc(doc(db, "users", auth.currentUser.uid), { shoppingList });
+        console.log("Liste gespeichert:", shoppingList);
+        toast({
+          title: "Erfolgreich gespeichert",
+          description: "Deine Einkaufsliste wurde erfolgreich gespeichert.",
+          status: "success",
+          duration: 3000,
+          isClosable: true,
+        });
+      } catch (error) {
+        console.error("Fehler beim Speichern:", error);
+        toast({
+          title: "Fehler beim Speichern",
+          description:
+            "Es gab einen Fehler beim Speichern deiner Einkaufsliste.",
+          status: "error",
+          duration: 3000,
+          isClosable: true,
+        });
+      }
     }
   };
 
